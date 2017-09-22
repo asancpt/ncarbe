@@ -93,7 +93,7 @@ betest = function(bedata, var, logtransformed)
     cvs = cbind(sqrt(sig2b)/mu.r, sqrt(sig2w)/mu.r) * 100
 
     lsm = cbind(mu.r, mu.t)
-    dimnames(lsm) = list("Arithmetic Means", cbind("Reference Drug", "Test Drug"))
+    dimnames(lsm) = list("Arithmetic Means", cbind("Reference Drug", "Test Drug"))/
 
     ci1 = (1 + ci0 / mu.r) * 100
     ci = rbind(ci0, ci1)

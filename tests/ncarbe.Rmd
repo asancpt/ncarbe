@@ -1,0 +1,77 @@
+---
+title: "R pacakge: ncarbe"
+author: "Sungpil Han"
+date: "2017-09-22"
+output: 
+  html_document:
+    toc: true
+    df_print: kable
+editor_options: 
+  chunk_output_type: console
+  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 개요
+
+`NonCompart` 패키지를 사용해서 2x2 생동성시험의 분산분석 등을 손쉽게 해주는 패키지입니다.
+지원하는 계산은 다음과 같습니다.
+
+|parameters | statistics|
+|---|--------------------------------------------------------------------------------------|
+| `AUC~last~` | Analysis of variance, between and within subject variability, least square means, confidence interval, and sample size |
+| `C~max~` | Analysis of variance, between and within subject variability, least square means, confidence interval, and sample size |
+| `T~max~` | Wilcoxon Signed-Rank Test and Hodges-Lehmann Estimate | 
+
+
+# 설치
+
+```{r installation, eval = FALSE}
+install.packages('devtools')
+devtools::install_github('asancpt/ncarbe')
+```
+
+# 실행
+
+## 예제 데이타 (시뮬레이션 데이타)
+
+2x2 생동성시험 디자인으로 36명의 데이타를 생성하여 시뮬레이션 한 것입니다. (배균섭 교수님 `pk1coma.R` 사용)
+
+```{r}
+file <- system.file('example', 'beConc.csv', package = 'ncarbe')
+concData <- read.csv(file, as.is = TRUE)
+head(concData)
+```
+
+## 자료 탐색
+
+그림을 그려보면 다음과 같습니다.
+```{r message = FALSE, fig.width=8, fig.height = 12}
+library(ggplot2)
+library(dplyr)
+
+concData %>% 
+  ggplot(aes(x = TIME, y = CONC, group = TRT, color = TRT)) +
+  geom_line(size = 0.5, alpha = 0.8) +
+  geom_point(size = 1, alpha = 0.5) +
+  xlab('Time (hr)') +
+  ylab('Concentrationg (ng/mL)') +
+  facet_wrap( ~ SUBJ, ncol = 4)
+```
+
+## 생동성 분석
+
+`beNCA()` 함수를 사용하여 분석한 결과입니다.
+
+```{r message = FALSE, warning=FALSE}
+library(ncarbe)
+beNCA(concData)
+```
+
+# Reference
+
+- `r format(citation('NonCompart'), style = 'html')`
+- `r format(citation('ncarbe'), style = 'html')`

@@ -3,3 +3,4 @@
 export(beNCA)
 import(NonCompart)
 import(dplyr)
+import(nlme)
