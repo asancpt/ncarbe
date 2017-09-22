@@ -1,0 +1,15 @@
+Package: ncarbe
+Title: Perform BE Test Using NonCompart Package
+Version: 0.0.1
+Authors@R: c(
+    person("Kyun-Seop", "Bae", email = "acr.kr", role = c("aut", "cre")),
+    person("Sungpil", "Han", email = "shan@acp.kr", role = "aut")
+    )
+Maintainer: Sungpil Han <shan@acp.kr>
+Description: Performs a statistical analysis of 2x2 bioequivalence study using NonCompart package created by Kyun-Seop Bae. * Reference: Shein-Chung Chow, Jen-pei Liu. Design and Analysis of Bioavailability and Bioequivalence Studies, 3rd ed. 2008. (ISBN:9781584886686)
+Depends: R (>= 3.4.1)
+License: GPL-3 | file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: NonCompart, dplyr
+RoxygenNote: 6.0.1
