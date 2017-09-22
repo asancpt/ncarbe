@@ -1,3 +1,2 @@
-
 roxygen:
-  roxygen2::roxygenise()
+  Rscript -e "roxygen2::roxygenise()"
