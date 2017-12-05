@@ -5,3 +5,4 @@
 ^README.*$
 ^beNCAdataset.*$
 ^releases$
+^docs$
