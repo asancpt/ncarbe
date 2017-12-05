@@ -4,5 +4,5 @@ roxygen:
 pkgdown:
 	Rscript -e "pkgdown::build_site()"
 
-github:
+readme:
 	Rscript -e "rmarkdown::render('README.Rmd', output_format = 'github_document')"

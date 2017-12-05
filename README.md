@@ -3,8 +3,10 @@ R pacakge: ncarbe
 Sungpil Han
 2017-09-22
 
-개요
-====
+ncarbe
+======
+
+<img src="https://shanmdphd.github.io/hex/ncarbe.png" height="200" alt="ncarbe R package" align="right" />
 
 `NonCompart` 패키지를 사용해서 2x2 생동성시험의 분산분석 등을 손쉽게 해주는 패키지입니다. 지원하는 계산은 다음과 같습니다.
 
