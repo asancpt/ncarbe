@@ -32,7 +32,7 @@ beNCA <- function(concData, SUBJ = 'SUBJ', GRP = 'GRP', PRD = 'PRD', TRT = 'TRT'
 
   bedataRaw <- NonCompart::tblNCA(as.data.frame(concData),
                                   key= betestKey,
-                                  colTime="TIME", colConc="CONC", dose=100000, ...) %>%
+                                  colTime="TIME", colConc="CONC", dose=100000, ..., R2ADJ = 0.5) %>%
     as_tibble() %>%
     mutate_at(vars(AUCLST, CMAX, TMAX), as.numeric) %>%
     arrange(GRP, PRD, SUBJ) %>%
