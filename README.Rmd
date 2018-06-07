@@ -1,7 +1,7 @@
 ---
 title: "R pacakge: ncarbe"
 author: "Sungpil Han"
-date: "2017-09-22"
+date: "`r Sys.Date()`"
 output: 
   github_document: default
   html_document:
@@ -50,7 +50,8 @@ head(concData)
 ## 자료 탐색
 
 그림을 그려보면 다음과 같습니다.
-```{r message = FALSE, fig.width=8, fig.height = 12}
+
+```{r conctimeplot, message = FALSE, fig.width=8, fig.height = 12}
 library(ggplot2)
 library(dplyr)
 
@@ -85,3 +86,9 @@ beNCA(concData, method = 'nlme')
 - `r format(citation('NonCompart'), style = 'html')`
 - `r format(citation('ncarbe'), style = 'html')`
 - `r format(citation('nlme'), style = 'html')`
+
+# devtools::session_info()
+
+```{r}
+devtools::session_info()
+```

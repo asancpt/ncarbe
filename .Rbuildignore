@@ -6,3 +6,4 @@
 ^beNCAdataset.*$
 ^releases$
 ^docs$
+^_pkgdown\.yml$

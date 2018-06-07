@@ -36,26 +36,39 @@ betest = function(bedata, var, logtransformed)
   Yi.1 = (Yi11 + Yi21) / 2
   Yi.2 = (Yi12 + Yi22) / 2
 
-  Y..1 = mean(Yi.1);
-  Y..2 = mean(Yi.2);
+  Y..1 = mean(Yi.1)
+  Y..2 = mean(Yi.2)
 
   mu.r = (Y.11 + Y.22) / 2
   mu.t = (Y.21 + Y.12) / 2
 
+  di1 = (Yi21 - Yi11) / 2
+  di2 = (Yi22 - Yi12) / 2
+
+  d.1 = mean(di1)
+  d.2 = mean(di2)
+
+#  sig2d = 1/(n1 + n2 - 2)*(sum((di1 - d.1)^2) + sum((di2 - d.2)^2))
+
+#  Chat = Y.12 + Y.22 - Y.11 - Y.21
+#  Fhat = mu.t - mu.r
+#  Phat = (Y.21 - Y.11 - Y.12 + Y.22)/2
+
   SScarry   = 2*n1*n2/(n1 + n2)*(Y.12 + Y.22 - Y.11 - Y.21)^2 / 4
-#  SSinter   = (sum(Yi.1^2) + sum(Yi.2^2) - Y..1^2 * n1  - Y..2^2 * n2) * 2
   SSinter   = (sum((Yi.1 - Y..1)^2) + sum((Yi.2 - Y..2)^2)) * 2
   SSbetween = SScarry + SSinter
 
   SSperiod  = 2*n1*n2/(n1+n2)*(Y.21 + Y.22 - Y.11 - Y.12)^2 / 4
   SSdrug    = 2*n1*n2/(n1+n2)*(Y.21 + Y.12 - Y.11 - Y.22)^2 / 4
-  SSintra   = SStotal - SScarry - SSinter - SSdrug - SSperiod
+
+  SSintra  = 2*(sum((di1 - d.1)^2) + sum((di2 - d.2)^2))
+#  SSmodel = SStotal - SSintra
 
   Source = c("SUBJECT", "GROUP", "SUBJECT(GROUP)", "PERIOD", "DRUG", "ERROR", "TOTAL");
   SS     = c(SSbetween, SScarry, SSinter, SSperiod, SSdrug, SSintra, SStotal);
   DF     = c(n1 + n2 - 1, 1, n1 + n2 - 2, 1, 1, n1 + n2 - 2, 2*n1 + 2*n2 - 1);
   MS     = SS / DF
-  mse    = SSintra / (n1 + n2 - 2);
+  mse    = SSintra/(n1 + n2 - 2)
   F      = MS / c(mse, MS[3], mse, mse, mse, mse, mse);
   p1 = 1 - pf(F[1], n1 + n2 - 1, n1 + n2 - 2)
   p2 = 1 - pf(F[2], 1, n1 + n2 - 2);
@@ -93,7 +106,7 @@ betest = function(bedata, var, logtransformed)
     cvs = cbind(sqrt(sig2b)/mu.r, sqrt(sig2w)/mu.r) * 100
 
     lsm = cbind(mu.r, mu.t)
-    dimnames(lsm) = list("Arithmetic Means", cbind("Reference Drug", "Test Drug"))/
+    dimnames(lsm) = list("Arithmetic Means", cbind("Reference Drug", "Test Drug"))
 
     ci1 = (1 + ci0 / mu.r) * 100
     ci = rbind(ci0, ci1)
@@ -162,6 +175,7 @@ hodges = function(bedata, var)
   names(result) = c("Wilcoxon Signed-Rank Test", "Hodges-Lehmann Estimate")
   return(result);
 }
+
 
 bss.r.mse = function(mse, true.r=1, alpha=0.1, beta=0.2, thetaL=0.8, thetaU=1.25, nmax=999999)
 {

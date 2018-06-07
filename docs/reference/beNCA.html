@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Performs a statistical analysis of 2x2 bioequivalence study — beNCA" />
+
+<meta property="og:description" content="beNCA returns text output of a statistical analysis of 2x2 bioequivalence study. Analysis of variance, least square means, confidence interval, and sample size will be calculated for AUClast and Cmax. Wilcoxon Signed-Rank Test and Hodges-Lehmann Estimate will be performed for Tmax." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">ncarbe</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">ncarbe</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -60,11 +76,15 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -72,20 +92,24 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Performs a statistical analysis of 2x2 bioequivalence study</h1>
+    
+    <div class="hidden name"><code>beNCA.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>beNCA</code> returns text output of a statistical analysis of 2x2 bioequivalence study. Analysis of variance, least square means, confidence interval, and sample size will be calculated for AUClast and Cmax. Wilcoxon Signed-Rank Test and Hodges-Lehmann Estimate will be performed for Tmax.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>beNCA</span>(<span class='no'>concData</span>, <span class='kw'>SUBJ</span> <span class='kw'>=</span> <span class='st'>"SUBJ"</span>, <span class='kw'>GRP</span> <span class='kw'>=</span> <span class='st'>"GRP"</span>, <span class='kw'>PRD</span> <span class='kw'>=</span> <span class='st'>"PRD"</span>, <span class='kw'>TRT</span> <span class='kw'>=</span> <span class='st'>"TRT"</span>,
   <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"kbe"</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -127,61 +151,61 @@
 #&gt; [AUClast]
 #&gt; 
 #&gt; $`Analysis of Variance`
-#&gt;                       SS DF         MS        F          p
-#&gt; SUBJECT        2.8102897 35 0.08029399 2.049048 0.01947896
-#&gt; GROUP          0.2811516  1 0.28115157 3.779609 0.06019307
-#&gt; SUBJECT(GROUP) 2.5291381 34 0.07438642 1.898290 0.03291404
-#&gt; PERIOD         0.2887407  1 0.28874073 7.368465 0.01035002
-#&gt; DRUG           0.1186721  1 0.11867210 3.028430 0.09086256
-#&gt; ERROR          1.3323243 34 0.03918601       NA         NA
-#&gt; TOTAL          4.5500268 71         NA       NA         NA
+#&gt;                        SS DF        MS        F           p
+#&gt; SUBJECT        35.7817072 35 1.0223345 1.854676 0.037320327
+#&gt; GROUP           1.1390308  1 1.1390308 1.117900 0.297825788
+#&gt; SUBJECT(GROUP) 34.6426764 34 1.0189022 1.848449 0.038831903
+#&gt; PERIOD          4.1989873  1 4.1989873 7.617625 0.009244748
+#&gt; DRUG            0.7021705  1 0.7021705 1.273848 0.266947114
+#&gt; ERROR          18.7414811 34 0.5512200       NA          NA
+#&gt; TOTAL          58.9756619 71        NA       NA          NA
 #&gt; 
 #&gt; $`Between and Within Subject Variability`
 #&gt;                                 Between Subject Within Subject
-#&gt; Variance Estimate                     0.0176002     0.03918601
-#&gt; Coefficient of Variation, CV(%)      13.3251642    19.99097469
+#&gt; Variance Estimate                     0.2338411        0.55122
+#&gt; Coefficient of Variation, CV(%)      51.3267693       85.75365
 #&gt; 
 #&gt; $`Least Square Means`
 #&gt;                 Reference Drug Test Drug
-#&gt; Geometric Means       5047.026  4648.063
+#&gt; Geometric Means       31.20441   25.5401
 #&gt; 
 #&gt; $`90% Confidence Interval`
 #&gt;                  Lower Limit Point Estimate Upper Limit
-#&gt; 90% CI for Ratio   0.8501323       0.920951   0.9976692
+#&gt; 90% CI for Ratio   0.6062815      0.8184771     1.10494
 #&gt; 
 #&gt; $`Sample Size`
 #&gt;                       True Ratio=1 True Ratio=Point Estimate
-#&gt; 80% Power Sample Size            8                        13
+#&gt; 80% Power Sample Size           96                      6538
 #&gt; 
 #&gt; 
 #&gt; 
 #&gt; [Cmax]
 #&gt; </div><div class='output co'>#&gt; <span class='warning'>Warning: NaN이 생성되었습니다</span></div><div class='output co'>#&gt; $`Analysis of Variance`
-#&gt;                        SS DF         MS         F         p
-#&gt; SUBJECT        2.85581816 35 0.08159480 0.9764709 0.5283290
-#&gt; GROUP          0.08840271  1 0.08840271 1.0861008 0.3046908
-#&gt; SUBJECT(GROUP) 2.76741545 34 0.08139457 0.9740747 0.5302983
-#&gt; PERIOD         0.04931289  1 0.04931289 0.5901430 0.4476669
-#&gt; DRUG           0.10908566  1 0.10908566 1.3054627 0.2612001
-#&gt; ERROR          2.84107119 34 0.08356092        NA        NA
-#&gt; TOTAL          5.85528790 71         NA        NA        NA
+#&gt;                        SS DF        MS         F          p
+#&gt; SUBJECT        22.1199814 35 0.6319995 0.6475704 0.89703843
+#&gt; GROUP           0.2047080  1 0.2047080 0.3175901 0.57675784
+#&gt; SUBJECT(GROUP) 21.9152734 34 0.6445669 0.6604475 0.88422171
+#&gt; PERIOD          3.6728929  1 3.6728929 3.7633843 0.06071806
+#&gt; DRUG            0.1136911  1 0.1136911 0.1164922 0.73497096
+#&gt; ERROR          33.1824629 34 0.9759548        NA         NA
+#&gt; TOTAL          58.9756619 71        NA        NA         NA
 #&gt; 
 #&gt; $`Between and Within Subject Variability`
 #&gt;                                 Between Subject Within Subject
-#&gt; Variance Estimate                  -0.001083173     0.08356092
-#&gt; Coefficient of Variation, CV(%)             NaN    29.52142270
+#&gt; Variance Estimate                     -0.165694      0.9759548
+#&gt; Coefficient of Variation, CV(%)             NaN    128.5962569
 #&gt; 
 #&gt; $`Least Square Means`
 #&gt;                 Reference Drug Test Drug
-#&gt; Geometric Means       791.1619     731.1
+#&gt; Geometric Means       26.30688  28.51506
 #&gt; 
 #&gt; $`90% Confidence Interval`
 #&gt;                  Lower Limit Point Estimate Upper Limit
-#&gt; 90% CI for Ratio   0.8221796       0.924084    1.038619
+#&gt; 90% CI for Ratio   0.7270811       1.083939    1.615946
 #&gt; 
 #&gt; $`Sample Size`
 #&gt;                       True Ratio=1 True Ratio=Point Estimate
-#&gt; 80% Power Sample Size           16                        26
+#&gt; 80% Power Sample Size          169                       298
 #&gt; 
 #&gt; 
 #&gt; 
@@ -189,12 +213,12 @@
 #&gt; 
 #&gt; $`Wilcoxon Signed-Rank Test`
 #&gt;   p-value 
-#&gt; 0.3059991 
+#&gt; 0.3286283 
 #&gt; 
 #&gt; $`Hodges-Lehmann Estimate`
 #&gt;                            Lower Limit Point Estimate Upper Limit
-#&gt; 90% Confidence Interval       -0.10000         0.0300       0.405
-#&gt; 90% Confidence Interval(%)    92.18517       102.3444     131.650
+#&gt; 90% Confidence Interval       -2.00000         1.0000      4.0000
+#&gt; 90% Confidence Interval(%)    87.11261       106.4437    125.7748
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -218,11 +242,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

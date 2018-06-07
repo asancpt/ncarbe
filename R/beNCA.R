@@ -12,7 +12,7 @@
 #' @return returns text results of statistical analysis of 2x2 bioequivalence study including and \code{beNCAdataset.csv} file in the working directory which can be run in SAS.
 #' @import NonCompart
 #' @import dplyr
-#' @import nlme
+#' @importFrom nlme intervals lme
 #' @export
 #' @examples
 #' file <- system.file('example', 'beConc.csv', package = 'ncarbe')
@@ -33,11 +33,10 @@ beNCA <- function(concData, SUBJ = 'SUBJ', GRP = 'GRP', PRD = 'PRD', TRT = 'TRT'
   bedataRaw <- NonCompart::tblNCA(as.data.frame(concData),
                                   key= betestKey,
                                   colTime="TIME", colConc="CONC", dose=100000, ..., R2ADJ = 0.5) %>%
-    as_tibble() %>%
+    as.data.frame() %>%
     mutate_at(vars(AUCLST, CMAX, TMAX), as.numeric) %>%
     arrange(GRP, PRD, SUBJ) %>%
-    select(SUBJ, TRT, GRP, PRD, AUClast = AUCLST, Cmax = CMAX, Tmax = TMAX) %>%
-    as.data.frame()
+    select(SUBJ, TRT, GRP, PRD, AUClast = AUCLST, Cmax = CMAX, Tmax = TMAX)
 
   bedata <- bedataRaw %>%
     mutate(lnAUClast = log(AUClast),
@@ -92,3 +91,4 @@ beNCA <- function(concData, SUBJ = 'SUBJ', GRP = 'GRP', PRD = 'PRD', TRT = 'TRT'
     print(ncarbestat)
   }
 }
+
